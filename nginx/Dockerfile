@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 ENV NGINX_VERSION 1.4.4
-RUN apt-get install -y libpcre3 libpcre3-dev libpcrecpp0 libgd2-xpm-dev
+RUN apt-get install -y build-essential curl libpcre3 libpcre3-dev libpcrecpp0 libgd2-xpm-dev libssl-dev
 RUN mkdir -p /src/
 RUN cd /src && curl -Ssfl http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | tar xfz -
 
