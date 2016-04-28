@@ -33,7 +33,7 @@ def cleanup_containers
 end
 
 def delete_container(id)
-  system "curl --unix-socker /var/run/docker.sock -X DELETE http://127.0.0.1:4243/containers/#{id}"
+  system "curl --unix-socket /var/run/docker.sock -X DELETE http://127.0.0.1:4243/containers/#{id}"
 end
 
 def load_containers
@@ -87,7 +87,7 @@ def cleanup_images
 end
 
 def delete_image(tag_or_id)
-  system "curl --unix-socker /var/run/docker.sock -X DELETE http://127.0.0.1:4243/images/#{tag_or_id}"
+  system "curl --unix-socket /var/run/docker.sock -X DELETE http://127.0.0.1:4243/images/#{tag_or_id}"
 end
 
 def get(url)
