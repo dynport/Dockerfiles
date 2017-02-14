@@ -1,12 +1,21 @@
 #!/bin/bash
 set -e -o pipefail
 
-pushd ./
+VERSION=$(grep "FROM jenkinsci" Dockerfile |  cut -d ":" -f 2)
 
-cd $GOPATH/src/github.com/dynport/kc && make
-popd
-cp $GOPATH/bin/kc ./
+if [[ -z $VERSION ]]; then
+  echo "unable to extract VERSION from Dockerfile"
+  exit 1
+fi
 
-docker build -t phraseapp/jenkins:$1 . && docker push phraseapp/jenkins:$1
+d=$(mktemp -d)
+cp Dockerfile $d
+pushd $d
+trap "rm -Rf $d" EXIT
 
-rm -f ./kc
+go build -o kc github.com/dynport/kc
+
+TAG=260336115275.dkr.ecr.eu-west-1.amazonaws.com/dynport/jenkins:${VERSION}
+
+docker build -t ${TAG} .
+docker push ${TAG}
