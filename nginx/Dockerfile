@@ -28,4 +28,6 @@ RUN cd /src/nginx-$NGINX_VERSION && \
 
 RUN mkdir -p /var/cache/nginx /var/log/nginx && ln -sf /dev/stdout /var/log/nginx/access.log  && ln -sf /dev/stderr /var/log/nginx/error.log
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
