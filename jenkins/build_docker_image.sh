@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e -o pipefail
 
-KC_VERSION=v14
+KC_VERSION=v20
 VERSION=$(grep "FROM jenkinsci" Dockerfile |  cut -d ":" -f 2)
 TAG=260336115275.dkr.ecr.eu-west-1.amazonaws.com/dynport/jenkins:${VERSION}-kc-${KC_VERSION}
 
@@ -16,7 +16,7 @@ function download_kc_release {
     abort "github token must be present in .gitconfig"
   fi
 
-  url=$(curl -s -u :${token} https://api.github.com/repos/dynport/kc/releases | jq '.[0].assets[] | select(.name | contains("linux.amd64")) | .url' -c -r)
+  url=$(curl -s -u :${token} https://api.github.com/repos/dynport/kc/releases | jq '.[] | select(.tag_name == "'$KC_VERSION'").assets[] | select(.name | contains("linux.amd64")) | .url' -c -r)
 
   if [[ -z $url ]]; then
     abort "unable to extract asset url"
