@@ -50,7 +50,12 @@ trap "rm -Rf $d" EXIT
 download_kc_release
 
 
-echo building ${TAG}
+echo "building ${TAG}"
 docker build -t ${TAG} .
+echo "built image ${TAG}"
+env | grep SKIP
+if [[ $SKIP_PUSH_IMAGE != "true" ]]; then
+echo "pushing image ${TAG}"
 docker push ${TAG}
-echo built ${TAG}
+echo "pushed image ${TAG}"
+fi
