@@ -53,7 +53,6 @@ download_kc_release
 echo "building image ${TAG}"
 docker build -t ${TAG} .
 echo "built    image ${TAG}"
-env | grep SKIP
 if [[ ${SKIP_PUSH_IMAGE} != "true" ]]; then
   echo "pushing image ${TAG}"
   docker push ${TAG}
