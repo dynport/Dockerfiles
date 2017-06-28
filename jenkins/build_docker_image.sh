@@ -27,12 +27,14 @@ function download_kc_release {
     abort "github token must be present in .gitconfig"
   fi
 
+  echo "downloading image with github token"
   url=$(curl -s -u :${GITHUB_TOKEN} https://api.github.com/repos/dynport/kc/releases | jq '.[0].assets[] | select(.name | contains("linux.amd64")) | .url' -c -r)
 
   if [[ -z $url ]]; then
     abort "unable to extract asset url"
   fi
 
+  echo "downloading binary"
   curl -sL -H 'Accept: application/octet-stream' -u :${GITHUB_TOKEN} ${url} | tar xfz -
 }
 
