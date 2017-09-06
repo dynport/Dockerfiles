@@ -1,0 +1,7 @@
+kubernetes_address = "https://k8s-prod.phraseapp.io:6443"
+kc_version = "v11"
+
+deployments = ["jenkins"]
+github_token_secret = "build-github-token"
+build_script = "build_docker_image.sh"
+image_repo = "260336115275.dkr.ecr.eu-west-1.amazonaws.com/phrase/phraseapp-growth"
