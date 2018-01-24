@@ -2,7 +2,7 @@
 set -e -o pipefail
 
 KC_VERSION=v21
-VERSION=$(grep "FROM jenkinsci" Dockerfile |  cut -d ":" -f 2)
+VERSION=$(grep "FROM jenkins" Dockerfile |  cut -d ":" -f 2)
 TAG=260336115275.dkr.ecr.eu-west-1.amazonaws.com/dynport/jenkins:${VERSION}-kc-${KC_VERSION}
 
 function abort() {
@@ -25,7 +25,7 @@ fi
 
 echo "using kc version ${KC_VERSION}"
 
-VERSION=$(grep "FROM jenkinsci" Dockerfile |  cut -d ":" -f 2)
+VERSION=$(grep "FROM jenkins" Dockerfile |  cut -d ":" -f 2)
 TAG=260336115275.dkr.ecr.eu-west-1.amazonaws.com/dynport/jenkins:${VERSION}-kc-${KC_VERSION}
 
 function download_kc_release {
