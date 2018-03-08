@@ -8,8 +8,8 @@ RUN apt-get upgrade -y
 
 RUN apt-get install -y curl build-essential git-core bzr mercurial
 
-ENV GO_VERSION 1.2
-RUN mkdir -p /opt/ && cd /opt/ && curl -SsfL http://go.googlecode.com/files/go$GO_VERSION.linux-amd64.tar.gz | tar xfz -
+ENV GO_VERSION 1.10
+RUN mkdir -p /opt/ && cd /opt/ && curl -SsfL https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar xfz -
 
 RUN mkdir /go
 
