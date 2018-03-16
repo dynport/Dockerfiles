@@ -21,10 +21,10 @@ function short_ref {
 }
 
 function full_revision {
-  rev=$(git_revision)
+  rev=$(short_ref $(git_revision))
   changed=$(changed_revision)
   if [[ -n $changed ]]; then
-    rev=$(short_ref $rev)-$(short_ref $changed)
+    rev=${rev}-$(short_ref $changed)
   fi
   echo ${rev}
 }
