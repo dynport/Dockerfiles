@@ -1,9 +1,10 @@
-FROM google/cloud-sdk:183.0.0
+FROM fedora:27
 
-# COPY google-cloud-sdk.sh /etc/yum.repos.d/google-cloud-sdk.repo
+COPY google-cloud-sdk.sh /etc/yum.repos.d/google-cloud-sdk.repo
 
-RUN apt update && apt install -y curl maven git golang google-cloud-sdk
+RUN dnf update -y && dnf install -y java-9-openjdk-headless google-cloud-sdk curl maven git golang awscli
 
+ARG GITHUB_TOKEN
 COPY kc /usr/local/bin/kc
 RUN curl -SsfL https://storage.googleapis.com/kubernetes-release/release/v1.9.2/bin/linux/amd64/kubectl > /usr/local/bin/kubectl && chmod a+x /usr/local/bin/kubectl /usr/local/bin/kc
 
@@ -13,7 +14,7 @@ RUN mkdir /workspace && \
 
 # Download the latest Jenkins swarm client with curl - version 3.3
 # Browse all versions here: https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/
-RUN curl -o /swarm-client.jar -s https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/3.9/swarm-client-3.9.jar
+RUN curl -o /swarm-client.jar -s https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/3.12/swarm-client-3.12.jar
 
 COPY entrypoint.sh /
 
