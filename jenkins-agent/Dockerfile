@@ -2,7 +2,9 @@ FROM fedora:27
 
 COPY google-cloud-sdk.sh /etc/yum.repos.d/google-cloud-sdk.repo
 
-RUN dnf update -y && dnf install -y java-9-openjdk-headless google-cloud-sdk curl maven git golang awscli
+ARG GCLOUD_VERSION
+
+RUN dnf update -y && dnf install -y java-9-openjdk-headless google-cloud-sdk-${GCLOUD_VERSION} curl maven git golang awscli
 
 ARG GITHUB_TOKEN
 COPY kc /usr/local/bin/kc
