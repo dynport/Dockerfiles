@@ -2,8 +2,8 @@
 set -e -o pipefail
 
 export GITHUB_TOKEN=$(kubectl get secrets/build-github-token -o json  | jq '.data.token' -c -r | base64 -d)
-export IMAGE=eu.gcr.io/build-140318/jenkins-agent:v8
-export KC_VERSION=v27
+export IMAGE=eu.gcr.io/build-140318/jenkins-agent:v9
+export KC_VERSION=v28
 
 if [[ -z $GITHUB_TOKEN ]]; then
   echo "unable to find GITHUB_TOKEN"
