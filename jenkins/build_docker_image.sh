@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e -o pipefail
 
-KC_VERSION=v27
+KC_VERSION=v21
 VERSION=$(grep "FROM jenkins" Dockerfile |  cut -d ":" -f 2)
 TAG=260336115275.dkr.ecr.eu-west-1.amazonaws.com/dynport/jenkins:${VERSION}-kc-${KC_VERSION}
 
