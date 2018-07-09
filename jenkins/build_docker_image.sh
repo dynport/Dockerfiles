@@ -34,7 +34,7 @@ function download_kc_release {
   fi
 
   echo "downloading image with github token"
-  url=$(curl -s -u :${GITHUB_TOKEN} https://api.github.com/repos/dynport/kc/releases | jq '.[0].assets[] | select(.name | contains("linux.amd64")) | .url' -c -r)
+  url=$(curl -s -u :${GITHUB_TOKEN} https://api.github.com/repos/phrase/kc/releases | jq '.[] | select(.tag_name == "'${KC_VERSION}'") | .assets[] | select(.name | contains("linux.amd64")) | .url' -c -r)
 
   if [[ -z $url ]]; then
     abort "unable to extract asset url"
